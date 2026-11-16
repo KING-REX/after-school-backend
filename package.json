@@ -1,0 +1,27 @@
+{
+  "name": "after-school-backend",
+  "version": "1.0.0",
+  "description": "Backend repository for the AfterSchool app, where after school lessons and activities can be bought.",
+  "homepage": "https://github.com/KING-REX/after-school-backend#readme",
+  "bugs": {
+    "url": "https://github.com/KING-REX/after-school-backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KING-REX/after-school-backend.git"
+  },
+  "license": "GPL-3.0-or-later",
+  "author": "Maurice Anijim James",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "mongodb": "^7.9.0",
+    "morgan": "^1.12.1",
+    "nodemon": "^3.1.14"
+  }
+}
