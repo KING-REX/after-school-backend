@@ -1,15 +1,34 @@
 const express = require("express");
 const router = express.Router();
+const { z } = require("zod");
+
+const createOrderSchema = z.object({
+  name: z.string().trim(),
+  phone_num: z.coerce.number(),
+  lesson_ids: z.array(z.string().trim()),
+  slots_purchased: z.coerce.number().default(1),
+  total_amount: z.coerce.number().optional(),
+});
+
+const editOrderSchema = z.object({
+  id: z.coerce.number().int().positive().optional(),
+  name: z.string().trim().optional(),
+  phone_num: z.coerce.number().optional(),
+  lesson_ids: z.array(z.string().trim()).optional(),
+  slots_purchased: z.coerce.number().optional(),
+  total_amount: z.coerce.number().optional(),
+});
 
 /** @type {import("../types/entities").Order[]} */
 const orders = require("../data/orders");
+const validateRequestBody = require("../middlewares/validateRequestBody");
 
 router
   .route("/orders")
   .get((req, res) => {
     res.status(200).json(orders);
   })
-  .post((req, res) => {
+  .post(validateRequestBody(createOrderSchema), (req, res) => {
     /** @type {import("../types/entities").Order} */
     const orderParam = req.body;
     /** @type {import("../types/entities").Order} */
@@ -35,7 +54,7 @@ router
     if (!order) res.status(404).send("Order not found!");
     res.status(200).json(order);
   })
-  .put((req, res) => {
+  .put(validateRequestBody(editOrderSchema), (req, res) => {
     const id = parseInt(req.params.id);
     if (id !== id) /* NaN is never equal to itself - so basically if(Number.isNaN(id)) */ {
       res.status(400).send("Invalid id");
