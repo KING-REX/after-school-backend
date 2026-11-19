@@ -5,7 +5,7 @@
  * @property {string} location
  * @property {number} price
  * @property {number} slots_available
- * @property {string} image_url
+ * @property {{ url: string, alt: string }} image
  */
 
 /**
