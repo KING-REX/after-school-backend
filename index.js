@@ -13,10 +13,14 @@ app.use(
 const morgan = require("morgan");
 app.use(morgan("dev")); //"dev" = shortcut for ":method :url :status :response-time ms - :res[content-length]" with color code indication
 
+const path = require("path");
+const imagesPath = path.resolve(__dirname, "public/images");
+
 const lessonRoutes = require("./routes/lessonRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 
 app.use("/", [lessonRoutes, orderRoutes]);
+app.use("/images", express.static(imagesPath));
 
 app.use((req, res) => {
   res.status(404).send("Page not found!");
