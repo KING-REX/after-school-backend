@@ -6,7 +6,7 @@ const app = express();
 const cors = require("cors");
 app.use(
   cors({
-    origin: "nothing_for_now_since_the_frontend_isn't_hosted_yet",
+    origin: ["http://127.0.0.1:5500"],
   }),
 );
 
